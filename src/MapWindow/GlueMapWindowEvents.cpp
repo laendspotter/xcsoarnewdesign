@@ -294,7 +294,10 @@ GlueMapWindow::OnMouseUp(PixelPoint p) noexcept
 #ifdef ENABLE_OPENGL
     kinetic_x.MouseUp(p.x);
     kinetic_y.MouseUp(p.y);
-    kinetic_timer.Schedule(std::chrono::milliseconds(30));
+    /* 16ms (~60Hz) smooth-refresh cadence; this path is only built
+       with ENABLE_OPENGL, which Kobo/e-paper framebuffer targets
+       don't use. */
+    kinetic_timer.Schedule(std::chrono::milliseconds(16));
 #endif
 
 #ifdef HAVE_EDL

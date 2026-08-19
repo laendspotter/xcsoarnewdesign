@@ -280,7 +280,9 @@ VScrollPanel::OnMouseUp(PixelPoint p) noexcept
 
     if (enable_kinetic) {
       kinetic.MouseUp(origin);
-      kinetic_timer.Schedule(std::chrono::milliseconds(30));
+      /* 16ms (~60Hz) smooth-refresh cadence; UsePixelPan() already
+         excludes e-paper/slow CPU targets (incl. Kobo). */
+      kinetic_timer.Schedule(std::chrono::milliseconds(16));
     }
     return true;
   }

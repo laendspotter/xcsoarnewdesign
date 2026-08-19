@@ -510,7 +510,11 @@ ListControl::OnMouseUp(PixelPoint p) noexcept
 
     if (enable_kinetic) {
       kinetic.MouseUp(GetPixelOrigin());
-      kinetic_timer.Schedule(std::chrono::milliseconds(30));
+      /* 16ms (~60Hz) matches the smooth-refresh cadence already used
+         elsewhere (e.g. Wayland resize throttling) for non-e-paper
+         displays; UsePixelPan() above already excludes e-paper/slow
+         CPU targets (incl. Kobo), so this doesn't add load there. */
+      kinetic_timer.Schedule(std::chrono::milliseconds(16));
     }
 
     return true;
