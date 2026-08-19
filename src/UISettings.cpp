@@ -37,6 +37,8 @@ UISettings::SetDefaults() noexcept
   dark_mode = DarkMode::AUTO;
 #endif
 
+  accent_color = AccentColor::XCSOAR;
+
   format.SetDefaults();
   map.SetDefaults();
   info_boxes.SetDefaults();

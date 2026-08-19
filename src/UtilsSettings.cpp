@@ -217,6 +217,7 @@ SettingsLeave(const UISettings &old_ui_settings)
   const MapSettings &settings_map = ui_settings.map;
 
   if (ui_settings.dark_mode != old_ui_settings.dark_mode ||
+      ui_settings.accent_color != old_ui_settings.accent_color ||
       ui_settings.info_boxes.use_colors != old_ui_settings.info_boxes.use_colors ||
       ui_settings.info_boxes.theme != old_ui_settings.info_boxes.theme ||
       settings_map.trail.type != old_settings_map.trail.type ||

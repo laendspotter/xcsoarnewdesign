@@ -2,6 +2,7 @@
 // Copyright The XCSoar Project
 
 #include "Look.hpp"
+#include "Colors.hpp"
 #include "UISettings.hpp"
 #include "GlobalSettings.hpp"
 
@@ -60,6 +61,10 @@ Look::InitialiseConfigured(const UISettings &settings,
                            const Font &map_font, const Font &map_bold_font,
                            unsigned infobox_width)
 {
+  /* apply the user's chosen accent (brand) color to the mutable
+     COLOR_XCSOAR* globals before any Look below picks it up */
+  ApplyAccentColorPreset(static_cast<std::size_t>(settings.accent_color));
+
   const bool dark_mode = GetDarkMode(settings);
   const bool infobox_dark_mode = GetInfoBoxDarkMode(settings, dark_mode);
 
