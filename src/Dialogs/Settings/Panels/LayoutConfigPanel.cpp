@@ -34,6 +34,7 @@ enum ControlIndex {
 #endif
   MapOrientation,
   DarkMode,
+  AccentColor,
   AppDisplayType,
   AppInfoBoxGeom,
   InfoBoxTitleScale,
@@ -165,6 +166,18 @@ static constexpr StaticEnumChoice dark_mode_list[] = {
   nullptr
 };
 
+static constexpr StaticEnumChoice accent_color_list[] = {
+  { UISettings::AccentColor::XCSOAR, N_("XCSoar (default)"),
+    N_("The classic XCSoar blue.") },
+  { UISettings::AccentColor::BLUE, N_("Blue"), nullptr },
+  { UISettings::AccentColor::TEAL, N_("Teal"), nullptr },
+  { UISettings::AccentColor::GREEN, N_("Green"), nullptr },
+  { UISettings::AccentColor::PURPLE, N_("Purple"), nullptr },
+  { UISettings::AccentColor::ORANGE, N_("Orange"), nullptr },
+  { UISettings::AccentColor::RED, N_("Red"), nullptr },
+  nullptr
+};
+
 static constexpr StaticEnumChoice infobox_theme_list[] = {
   { InfoBoxSettings::Theme::FOLLOW_GLOBAL, N_("Follow global"),
     N_("Use the same light/dark mode as the overall UI.") },
@@ -219,6 +232,11 @@ LayoutConfigPanel::Prepare(ContainerWindow &parent,
 #else
   AddDummy();
 #endif
+
+  AddEnum(_("Accent color"),
+          _("Choose the accent color used for buttons, selection "
+            "highlights and dialog accents."),
+          accent_color_list, (unsigned)ui_settings.accent_color);
 
   AddEnum(C_("Setting", "Display type"),
           _("Select the display technology. E-ink modes disable kinetic "
@@ -331,6 +349,9 @@ LayoutConfigPanel::Save(bool &_changed) noexcept
     changed = true;
   }
 #endif
+
+  changed |= SaveValueEnum(AccentColor, ProfileKeys::AccentColor,
+                           ui_settings.accent_color);
 
   if (SaveValueEnum(AppDisplayType, ProfileKeys::DisplayType,
                     ui_settings.display.display_type)) {

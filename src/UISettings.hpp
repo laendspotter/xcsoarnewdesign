@@ -72,6 +72,26 @@ struct UISettings {
     AUTO,
   } dark_mode;
 
+  /**
+   * The user-selectable accent ("brand") color, applied to buttons,
+   * selection highlights, dialog/list focus and InfoBox accents.
+   * Colors that carry a fixed meaning (airspace warnings, XCTherm
+   * palette, climb/sink red-green) are not affected by this setting.
+   *
+   * See Look/Colors.hpp for the actual RGB values of each preset,
+   * and Look::InitialiseConfigured() for where this is applied.
+   */
+  enum class AccentColor : uint_least8_t {
+    /** the classic XCSoar blue (or red in testing builds) */
+    XCSOAR,
+    BLUE,
+    TEAL,
+    GREEN,
+    PURPLE,
+    ORANGE,
+    RED,
+  } accent_color;
+
   FormatSettings format;
   MapSettings map;
   InfoBoxSettings info_boxes;
